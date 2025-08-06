@@ -5,11 +5,10 @@ from typing import List, Dict
 
 class LicensePlateDetector:
     def __init__(self, model_path, device='cuda' if torch.cuda.is_available() else 'cpu'):
-        # Đường dẫn đến thư mục yolov5 đã clone
+        # Đường dẫn đến thư mục yolov5
         yolov5_repo_path = '/Users/nhatquang/CPC1HN/pipeline/yolov5' 
         
         self.device = device
-        # Load model từ local thay vì torch.hub
         self.model = torch.hub.load(yolov5_repo_path, 'custom', 
                                   path=model_path, source='local')
         self.model.to(self.device).eval()
