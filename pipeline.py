@@ -9,7 +9,7 @@ from recognizer import LicensePlateRecognizer
 class LicensePlatePipeline:
     def __init__(self, detect_model_path: str, ocr_model_path: str, ocr_config_path: str = None):
         self.detector = LicensePlateDetector(detect_model_path)
-        self.recognizer = LicensePlateRecognizer(ocr_model_path, ocr_config_path)  # Thêm tham số config
+        self.recognizer = LicensePlateRecognizer(ocr_model_path, ocr_config_path)
         self.executor = ThreadPoolExecutor(max_workers=4)
     
     def process_image(self, image_path: str, output_dir: str = 'outputs') -> Dict:
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     pipeline = LicensePlatePipeline(
         detect_model_path='models/best.pt',
         ocr_model_path='models/ckpt-epoch_30-acc_0.962.onnx',
-        ocr_config_path='cct_xs_v1_global_plate_config.yaml'  # Thêm đường dẫn config
+        ocr_config_path='cct_xs_v1_global_plate_config.yaml'
     )
     
     # Lấy danh sách ảnh từ thư mục inputs
