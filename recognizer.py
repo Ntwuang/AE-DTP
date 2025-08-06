@@ -66,11 +66,11 @@ class LicensePlateRecognizer:
 
     def preprocess_for_ocr(self, image: np.ndarray) -> np.ndarray:
         """Tiền xử lý ảnh theo cấu hình"""
-        # Xử lý màu sắc - đảm bảo đầu ra là RGB
-        if len(image.shape) == 2:  # Nếu ảnh grayscale
+        # Xử lý màu sắc
+        if len(image.shape) == 2:
             image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
         else:
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # Chuyển từ BGR sang RGB
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     
         # Resize ảnh về đúng kích thước model yêu cầu (128x64)
         resized = cv2.resize(image, (128, 64), interpolation=cv2.INTER_LINEAR)
@@ -113,12 +113,9 @@ class LicensePlateRecognizer:
         
         # Kiểm tra cấu trúc biển số Việt Nam
         if len(cleaned) >= self.config['min_plate_length']:
-            # Dạng 51A12345 hoặc 51A1234
             if (cleaned[:2].isdigit() and cleaned[2].isalpha() and 
                 cleaned[3:].isdigit()):
                 return cleaned
-            
-            # Dạng AB12345
             elif (cleaned[:2].isalpha() and cleaned[2:].isdigit()):
                 return cleaned
         
