@@ -9,4 +9,5 @@ Step1: Clone repository YOLOv5 về local
 Step2: Điều chỉnh các path phù hợp trong pipeline.py
 
 Step3: Run pipeline.py
+
 'python3 pipeline.py'
